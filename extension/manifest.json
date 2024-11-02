@@ -1,10 +1,19 @@
 {
-    "name": "ContentRadar Extension",
-    "description": "Base Level Extension",
-    "version": "1.0",
-    "manifest_version": 3,
-    "action": {
-      "default_popup": "index.html",
-      "default_icon": "png.png"
+  "manifest_version": 3,
+  "name": "Youtube Translater",
+  "description": "Translate youtube comments to a preferred language",
+  "version": "0.1.0",
+  "permissions": ["storage", "tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["script.js"]
     }
-  }
+  ]
+}
