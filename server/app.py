@@ -3,6 +3,7 @@ from flask_cors import CORS
 import json
 from ai import process_data
 
+from util import get_link_data
 
 app = Flask(__name__)
 CORS(app) 
@@ -24,6 +25,15 @@ def accept_text():
     print(process_data(text))
     return "text"
 
+
+@app.route('/embed', methods=['GET'])
+def get_embed():
+    link = request.args.get('link')
+    if link:
+        info = get_link_data(link)
+        return info
+    else:
+        return "No link provided", 400
 
 if __name__ == '__main__':
     app.run(debug=True)

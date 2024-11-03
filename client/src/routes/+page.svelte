@@ -1,5 +1,6 @@
 <script>
-import Sidebar from '../lib/components/ui/sidebar/Sidebar.svelte';
+// import Sidebar from '../lib/components/ui/sidebar/Sidebar.svelte';
+import Mosiac from '../lib/Mosiac.svelte';
 
 let props = $props();
 const recommendations = [
@@ -8,11 +9,18 @@ const recommendations = [
       {
         link: 'https://stackoverflow.com/questions/34600003/converting-json-to-string-in-python',
         confidence: 0.1
+      },
+      {
+        link: 'https://stackoverflow.com/questions/34600003/converting-json-to-string-in-python',
+        confidence: 0.8
+      },
+      {
+        link: 'https://stackoverflow.com/questions/34600003/converting-json-to-string-in-python',
+        confidence: 0.7
       }
     ];
 </script>
 
 <div> 
-  <Sidebar />
   <Mosiac {recommendations} />
 </div>
