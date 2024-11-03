@@ -1,19 +1,20 @@
 {
   "manifest_version": 3,
-  "name": "Youtube Translater",
-  "description": "Translate youtube comments to a preferred language",
-  "version": "0.1.0",
-  "permissions": ["storage", "tabs"],
+  "name": "Sample Extension",
+  "version": "1.0",
+  "description": "An example Chrome extension with background and content scripts.",
+  "permissions": ["storage", "activeTab", "scripting"],
   "background": {
     "service_worker": "background.js"
   },
-  "action": {
-    "default_popup": "index.html"
-  },
+  "host_permissions": ["<all_urls>"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": ["script.js"]
     }
-  ]
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
 }
