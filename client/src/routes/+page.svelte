@@ -7,5 +7,7 @@
   let embeds = data.data
 </script>
 
-<Mosiac recommendations={embeds} />
+<div class="w-[100%]">
+  <Mosiac recommendations={embeds} />
+</div>
 
