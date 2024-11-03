@@ -1,14 +1,20 @@
 // Function to send a message to the background service worker
 function sendMessageToBackground() {
   console.log("sending");
-  chrome.runtime.sendMessage({ type: "sendText", payload: document.body.innerText }, (response) => {
-    if (chrome.runtime.lastError) {
-      console.error("Error:", chrome.runtime.lastError);
-    } else {
-      console.log("Response from background script:", response.response);
-    }
-  });
+  if (chrome && chrome.runtime && chrome.runtime.sendMessage) {
+    console.log("Sending message to background...");
+    chrome.runtime.sendMessage({ type: "sendText", payload: document.body.innerText }, (response) => {
+      if (chrome.runtime.lastError) {
+        console.error("Error:", chrome.runtime.lastError.message);
+      } else if (response) {
+        console.log("Response from background script:", response.response);
+      } else {
+        console.log("No response from background script.");
+      }
+    });
+  } else {
+    console.error("chrome.runtime.sendMessage is not available.");
+  }
 }
 
-// Call the function every 10 seconds
-setInterval(sendMessageToBackground, 10000);
+setInterval(sendMessageToBackground, 1000);
