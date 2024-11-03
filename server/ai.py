@@ -29,7 +29,13 @@ def generate_insight(data, search_data):
     response = client.chat.completions.create(
         model='Meta-Llama-3.2-3B-Instruct',
         messages=[
-            {"role":"system","content":"You are an assistant that generates insights about a topic given the original data and Google search results. Output should be in a consistent format. Also return some links to sources."},
+            {"role":"system","content":"""
+             Summarize the given data and Google search results in a structured format. Use the following guidelines to ensure consistency:
+
+            - **Data Summary**: Analyze and summarize the provided data in 5 sentences.
+            - **Google Search Results**: Provide a separate 5-sentence summary for each search result, clearly separated by a newline.
+
+            - Ensure there are no duplicates and no other text or labels. """},
             {"role":"user","content":f"Original Data: {data}"},
             {"role":"user","content":f"Serper Search Results: {search_data}"}
         ],
@@ -42,12 +48,14 @@ def generate_insight(data, search_data):
     
 def process_data(data):
     query_obj = generate_query(data)
-    # print(json.dumps(query_obj))
 
-    search_data = search_google(query_obj)
-    # print(search_data)
+    search_data = search_google(query_obj)  
 
-    return generate_insight(data, search_data)
+    from datetime import datetime
+    insight_lines = generate_insight(data, search_data).replace("**Google Search Results**", "").replace("**Data Summary**", "").split("\n")
+    filtered_lines = [line for line in insight_lines if line.strip() != ""]
+    
+    return [{"content": line, "platform": "web", "time": datetime.now().isoformat()} for line in filtered_lines]
 
 print(process_data("""
              Google is currently fighting a lawsuit filed by the US labor department claiming gender discrimination. Officials of Google said it was too financially burdensome and logistically challenging to hand over salary records that the government requested in order to investigate.[53] A judge has however ordered Google to hand over salary records to the government in this ongoing investigation by the US Department of Labor.[54]
