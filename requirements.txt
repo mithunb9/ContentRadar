@@ -30,3 +30,15 @@ typing_extensions==4.12.2
 urllib3==2.2.3
 Werkzeug==3.1.1
 zipp==3.20.2
+sqlalchemy-iris
+langchain-iris
+llama-iris
+llama-index-legacy
+sentence-transformers~=3.2.1
+langchain
+fastembed
+openai
+tiktoken
+python-dotenv~=1.0.1
+pandas
+setuptools

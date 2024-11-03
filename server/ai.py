@@ -1,7 +1,8 @@
 import os
-from openai import OpenAI
+
 from dotenv import load_dotenv
-import json
+from openai import OpenAI
+
 from search import search_google
 
 load_dotenv()
