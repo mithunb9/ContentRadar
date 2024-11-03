@@ -34,7 +34,30 @@ def get_embed():
         return info
     else:
         return "No link provided", 400
+    
+@app.route('/rec', methods=['GET'])
+def get_rec():
+    recommendations = [
+        { "link": 'https://www.nichepursuits.com/popular-blogs/', "confidence": 0.9 },
+        {
+            "link": 'https://firstsiteguide.com/examples-of-blogs/',
+            "confidence": 0.85
+        },
+        {
+            "link": 'https://masterblogging.com/best-blog-examples/',
+            "confidence": 0.8
+        },
+        {
+            "link": 'https://www.wpbeginner.com/showcase/best-blog-examples/',
+            "confidence": 0.75
+        },
+        {
+            "link": 'https://www.ryrob.com/blog-examples/',
+            "confidence": 0.7
+        }
+    ]
+
+    return recommendations
 
 if __name__ == '__main__':
     app.run(debug=True)
-    
