@@ -1,5 +1,11 @@
 <script>
-    let props = $props();
+import Sidebar from '../lib/components/ui/sidebar/Sidebar.svelte';
+
+let props = $props();
 </script>
 
-<h1>{props.data.recommendations}</h1>
+<div> 
+  <Sidebar />
+  <h1>Welcome to SvelteKit</h1>
+  <h1>{props.data.recommendations}</h1>
+</div>
